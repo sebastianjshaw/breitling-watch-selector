@@ -1,6 +1,20 @@
-# React + TypeScript + Vite
+# Breitling watch selector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite prototype (filters, modal detail, infinite scroll).
+
+## GitHub Pages
+
+The workflow `.github/workflows/deploy-github-pages.yml` deploys on every push to `main`.
+
+**If deploy fails with `Failed to create deployment (status: 404)`**, open **Settings → Pages** for this repository and set **Build and deployment → Source** to **GitHub Actions** (not “Deploy from a branch” or “None”). Then re-run the failed workflow or push again.
+
+Live URL (after a successful deploy): `https://<your-username>.github.io/breitling-watch-selector/`
+
+---
+
+## React + TypeScript + Vite
+
+This project uses the standard Vite React template. Original template notes:
 
 Currently, two official plugins are available:
 
