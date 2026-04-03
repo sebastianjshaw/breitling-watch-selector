@@ -1,9 +1,5 @@
-Photographs in this folder are sourced from Wikimedia Commons for prototype use.
-They depict genuine Breitling timepieces but may not match the mock references
-and marketing copy in the app.
+Product card images (ProductCard*.png) are Breitling-style product shots used for
+this prototype selector. They are not from Wikimedia Commons.
 
-Each file retains the license of its Commons source (typically CC BY-SA 3.0/4.0
-or GFDL). Before any public or commercial use, verify the license on the file
-page at https://commons.wikimedia.org/ and provide attribution as required.
-
-Suggested search: use the filename stem (e.g. "Breitling-Navitimer") on Commons.
+Legacy JPEG/PNG files (nav-*.jpg, chr-*.jpg, etc.) may remain in this folder for
+reference but are no longer referenced by the app catalog.

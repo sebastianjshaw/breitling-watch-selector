@@ -1,6 +1,6 @@
 import type { Watch } from './types'
 
-/** Local assets in /public/watches — real Breitling timepieces via Wikimedia Commons (CC BY-SA / GFDL; see repository notes). */
+/** Local assets in /public/watches — Breitling product card PNGs for grid + modal. */
 function watchPhoto(file: string): string {
   return `${import.meta.env.BASE_URL}watches/${file}`
 }
@@ -17,7 +17,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '30 m',
-    heroImageUrl: watchPhoto('nav-01.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-1.png'),
     materialsDetail:
       'Stainless steel case and bracelet. Cambered sapphire crystal, glare-proofed both sides. Screw-locked crown.',
     description:
@@ -34,7 +34,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '30 m',
-    heroImageUrl: watchPhoto('nav-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-2.png'),
     materialsDetail:
       'Stainless steel case. Alligator leather strap with folding clasp. Sapphire crystal with anti-reflective coating.',
     description:
@@ -51,7 +51,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Green',
     movement: 'Automatic',
     waterResistance: '30 m',
-    heroImageUrl: watchPhoto('nav-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-3.png'),
     materialsDetail:
       'Stainless steel and 18k red gold case. Brown alligator strap. Sapphire crystal front and back.',
     description:
@@ -68,7 +68,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '200 m',
-    heroImageUrl: watchPhoto('chr-01.png'),
+    heroImageUrl: watchPhoto('ProductCard-4.png'),
     materialsDetail:
       'Stainless steel case and Rouleaux bracelet. Unidirectional ratcheted bezel with rider tabs. Screw-down crown.',
     description:
@@ -85,7 +85,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '200 m',
-    heroImageUrl: watchPhoto('chr-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-5.png'),
     materialsDetail:
       'Stainless steel case and bracelet. Ceramic bezel insert. Twin-time zone complication with independent hour hand.',
     description:
@@ -102,7 +102,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Copper',
     movement: 'Automatic',
     waterResistance: '200 m',
-    heroImageUrl: watchPhoto('chr-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-6.png'),
     materialsDetail:
       '18k red gold case. Rubber strap with 18k red gold folding clasp. Ceramic bezel with rider tabs.',
     description:
@@ -119,7 +119,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '500 m',
-    heroImageUrl: watchPhoto('so-01.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-7.png'),
     materialsDetail:
       'Stainless steel case. Breitling rubber strap. Sapphire crystal. Helium escape valve for saturation diving.',
     description:
@@ -136,7 +136,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'White',
     movement: 'Automatic',
     waterResistance: '300 m',
-    heroImageUrl: watchPhoto('so-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-8.png'),
     materialsDetail:
       'Stainless steel case and bracelet. Ceramic bezel. Super-LumiNova hands and indexes.',
     description:
@@ -153,7 +153,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '200 m',
-    heroImageUrl: watchPhoto('so-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-9.png'),
     materialsDetail:
       'Stainless steel case. Ocean Classic mesh bracelet. High-domed sapphire crystal evoking vintage acrylic.',
     description:
@@ -170,7 +170,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '300 m',
-    heroImageUrl: watchPhoto('av-01.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-10.png'),
     materialsDetail:
       'Stainless steel case with rider grip pattern on crown. Military leather strap. Cambered sapphire crystal.',
     description:
@@ -187,7 +187,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '3000 m',
-    heroImageUrl: watchPhoto('av-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-11.png'),
     materialsDetail:
       'Stainless steel case rated for extreme pressure. Vulcanized rubber strap. Screw-down crown and caseback.',
     description:
@@ -204,7 +204,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '300 m',
-    heroImageUrl: watchPhoto('av-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-12.png'),
     materialsDetail:
       'Black ceramic case. Military rubber strap. Titanium caseback and deployant elements for comfort.',
     description:
@@ -221,7 +221,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Copper',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('pr-01.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-13.png'),
     materialsDetail:
       'Stainless steel case. Croco-style calfskin strap. Box sapphire crystal with double AR coating.',
     description:
@@ -238,7 +238,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Silver',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('pr-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-14.png'),
     materialsDetail:
       'Stainless steel case. Brown leather strap with pin buckle. Fluted pushers and vintage-inspired dial texture.',
     description:
@@ -255,7 +255,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Manual',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('pr-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-15.png'),
     materialsDetail:
       '18k red gold case. Black alligator strap. Sapphire display back revealing split-seconds architecture.',
     description:
@@ -272,7 +272,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Purple',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('tt-01.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-16.png'),
     materialsDetail:
       'Stainless steel case. Racing perforated leather strap. Toughened sapphire crystal with vintage domed profile.',
     description:
@@ -289,7 +289,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('tt-02.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-17.png'),
     materialsDetail:
       'Stainless steel case. Woven NATO strap with steel keepers. Zorro dial graphic with contrasting sub-dials.',
     description:
@@ -306,7 +306,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Green',
     movement: 'Automatic',
     waterResistance: '30 m',
-    heroImageUrl: watchPhoto('nav-04.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-18.png'),
     materialsDetail:
       'Stainless steel case. Green alligator strap. Slide rule bezel with logarithmic scales for flight calculations.',
     description:
@@ -323,7 +323,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Silver',
     movement: 'Quartz',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('chr-04.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-19.png'),
     materialsDetail:
       'Stainless steel case and Rouleaux bracelet. Diamond-set bezel indices optional in production models.',
     description:
@@ -340,7 +340,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Blue',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('so-04.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-20.png'),
     materialsDetail:
       'Stainless steel case. Woven pastel NATO strap. Bidirectional ceramic bezel with summer color palette.',
     description:
@@ -357,7 +357,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Black',
     movement: 'Automatic',
     waterResistance: '300 m',
-    heroImageUrl: watchPhoto('av-04.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-21.png'),
     materialsDetail:
       'Stainless steel case and bracelet. Screw-down crown guards. Military stencil dial typography.',
     description:
@@ -374,7 +374,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Green',
     movement: 'Manual',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('pr-04.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-22.png'),
     materialsDetail:
       'Stainless steel case. Pistachio-toned salmon adjacent dial in certain light. Manual-wind column-wheel chronograph.',
     description:
@@ -391,7 +391,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'White',
     movement: 'Automatic',
     waterResistance: '100 m',
-    heroImageUrl: watchPhoto('tt-03.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-23.png'),
     materialsDetail:
       'Stainless steel case. Brown bund-style leather option compatible. Lightning bolt small seconds hand.',
     description:
@@ -408,7 +408,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Purple',
     movement: 'Automatic',
     waterResistance: '30 m',
-    heroImageUrl: watchPhoto('nav-05.jpg'),
+    heroImageUrl: watchPhoto('ProductCard.png'),
     materialsDetail:
       'Stainless steel case. Lilac leather strap. Slimmed slide rule for 36 mm case diameter.',
     description:
@@ -425,7 +425,7 @@ export const WATCHES: Watch[] = [
     dialColor: 'Green',
     movement: 'Automatic',
     waterResistance: '200 m',
-    heroImageUrl: watchPhoto('chr-05.jpg'),
+    heroImageUrl: watchPhoto('ProductCard-1.png'),
     materialsDetail:
       'Titanium case and bezel rider tabs. Green rubber strap with titanium deployant. Lightweight sport profile.',
     description:
