@@ -511,15 +511,36 @@
   z-index: 1;
 }
 
+/* Filter on a wrapper — WebKit often ignores filter on <img> with object-fit */
+.breitling-watch-selector-card-image-wrap {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-filter: saturate(0.6);
+  filter: saturate(0.6);
+  transition:
+    -webkit-filter 0.45s ease,
+    filter 0.45s ease;
+}
+
+.breitling-watch-selector-card:hover .breitling-watch-selector-card-image-wrap,
+.breitling-watch-selector-card:focus-visible .breitling-watch-selector-card-image-wrap {
+  -webkit-filter: saturate(1);
+  filter: saturate(1);
+}
+
 .breitling-watch-selector-card img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.45s ease;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.breitling-watch-selector-card:hover img {
-  transform: scale(1.04);
+.breitling-watch-selector-card:hover img,
+.breitling-watch-selector-card:focus-visible img {
+  transform: scale(1.08);
 }
 
 .breitling-watch-selector-card-overlay {
@@ -527,16 +548,38 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.35) 0%,
-    transparent 45%
+    rgba(9, 9, 26, 0.5) 0%,
+    rgba(9, 9, 26, 0.08) 42%,
+    transparent 58%
   );
   opacity: 0;
-  transition: opacity 0.25s;
+  transition: opacity 0.35s ease;
   pointer-events: none;
 }
 
-.breitling-watch-selector-card:hover .breitling-watch-selector-card-overlay {
+.breitling-watch-selector-card:hover .breitling-watch-selector-card-overlay,
+.breitling-watch-selector-card:focus-visible .breitling-watch-selector-card-overlay {
   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep desaturation; only skip motion-heavy transitions */
+  .breitling-watch-selector-card-image-wrap {
+    transition: none;
+  }
+
+  .breitling-watch-selector-card img {
+    transition: none;
+  }
+
+  .breitling-watch-selector-card:hover img,
+  .breitling-watch-selector-card:focus-visible img {
+    transform: none;
+  }
+
+  .breitling-watch-selector-card-overlay {
+    transition: none;
+  }
 }
 
 .breitling-watch-selector-empty {

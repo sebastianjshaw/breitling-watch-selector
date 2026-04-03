@@ -16,12 +16,14 @@ export function BreitlingWatchCard({
       onClick={() => onSelect(watch)}
       aria-label={`${watch.name}, ${watch.reference}`}
     >
-      <img
-        src={watch.heroImageUrl}
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
+      <span className="breitling-watch-selector-card-image-wrap">
+        <img
+          src={watch.heroImageUrl}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
       <span className="breitling-watch-selector-card-overlay" aria-hidden />
     </button>
   )
