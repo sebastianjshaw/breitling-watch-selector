@@ -188,7 +188,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px 20px;
   max-width: var(--breitling-layout-max);
   margin: 0 auto;
@@ -196,8 +196,14 @@
   min-height: 52px;
 }
 
+/* Keep Filter (control bar) on the trailing edge whether the dock logo is visible or visually hidden */
+.breitling-watch-selector-sticky-dock-inner > .breitling-watch-selector-control-bar {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .breitling-watch-selector-sticky-dock-inner-controls-end {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .breitling-watch-selector-sticky-dock-logo {
@@ -415,34 +421,49 @@
     min-height: 58px;
   }
 
-  .breitling-watch-selector-mobile-nav-toggle {
-    display: inline-flex;
-  }
-
+  /*
+   * Flex (not grid): when the dock logo is visually hidden it is position:absolute and
+   * does not participate in layout — grid's middle track could collapse oddly. Flex +
+   * margin-left:auto on the control bar keeps Filter on the trailing edge in both states.
+   */
   .breitling-watch-selector-sticky-dock-inner {
-    display: grid;
-    grid-template-columns: var(--breitling-touch-target-min) minmax(0, 1fr) auto;
+    display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 6px 10px;
+    justify-content: flex-start;
+    gap: 8px 12px;
     padding-top: 8px;
     padding-bottom: 8px;
     min-height: 42px;
   }
 
-  .breitling-watch-selector-sticky-dock-logo {
-    justify-self: center;
-    max-width: 100%;
+  .breitling-watch-selector-mobile-nav-toggle {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  /* In-flow logo: grow middle zone and centre the mark between hamburger and Filter */
+  .breitling-watch-selector-sticky-dock-logo:not(
+      .breitling-watch-selector-sticky-dock-logo-concealed
+    ) {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 0;
+    max-width: 100%;
   }
 
   .breitling-watch-selector-sticky-dock-inner .breitling-watch-selector-control-bar {
-    justify-self: end;
+    margin-left: auto;
+    flex-shrink: 0;
     width: auto;
     justify-content: flex-end;
   }
 
   .breitling-watch-selector-sticky-dock-inner-controls-end
     .breitling-watch-selector-control-bar {
+    margin-left: auto;
     width: auto;
     justify-content: flex-end;
   }
@@ -645,16 +666,12 @@
   gap: 10px 12px;
 }
 
-.breitling-watch-selector-sticky-dock-inner-controls-end
-  .breitling-watch-selector-control-bar {
-  width: 100%;
-  justify-content: space-between;
-}
-
-@media (min-width: 480px) {
+/* Desktop: controls-end keeps Day + Filter grouped on the trailing edge (≥768 only — never overrides mobile) */
+@media (min-width: 768px) {
   .breitling-watch-selector-sticky-dock-inner-controls-end
     .breitling-watch-selector-control-bar {
     width: auto;
+    margin-left: auto;
     justify-content: flex-end;
   }
 }
