@@ -6,9 +6,17 @@ React + TypeScript + Vite prototype (filters, modal detail, infinite scroll).
 
 The workflow `.github/workflows/deploy-github-pages.yml` deploys on every push to `main`.
 
-**If deploy fails with `Failed to create deployment (status: 404)`**, open **Settings → Pages** for this repository and set **Build and deployment → Source** to **GitHub Actions** (not “Deploy from a branch” or “None”). Then re-run the failed workflow or push again.
+### `Failed to create deployment (status: 404)`
 
-Live URL (after a successful deploy): `https://<your-username>.github.io/breitling-watch-selector/`
+GitHub is not allowing Actions to publish until Pages is wired to this workflow.
+
+1. Open **[Settings → Pages](https://github.com/sebastianjshaw/breitling-watch-selector/settings/pages)** for the repo.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch” and not “None”).
+3. Go to **Actions**, open the **latest** workflow run on `main`, and use **Re-run all jobs** (or push a new commit).
+
+Errors tied to an **old commit SHA** or **`deploy-pages@v4`** in the log are usually from an **earlier failed run** before the workflow was updated. Always check the **most recent** run after `main` is up to date.
+
+Live URL (after a successful deploy): `https://sebastianjshaw.github.io/breitling-watch-selector/`
 
 ---
 

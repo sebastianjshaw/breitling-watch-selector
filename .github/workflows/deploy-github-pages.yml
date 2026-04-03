@@ -1,8 +1,11 @@
 # Build and deploy to GitHub Pages.
 #
-# REQUIRED (one-time): Repo → Settings → Pages → Build and deployment → Source:
-# "GitHub Actions". If Source is "Deploy from a branch" or "None", deploy will
-# fail with HTTP 404 when creating the deployment.
+# REQUIRED (one-time) or deploy fails with HTTP 404:
+#   https://github.com/OWNER/REPO/settings/pages
+#   → Build and deployment → Source → select "GitHub Actions" (not a branch).
+#
+# If Actions shows errors for an OLD commit (e.g. deploy-pages@v4), open the
+# latest run on main or use "Run workflow" — stale runs keep old logs.
 #
 name: Deploy to GitHub Pages
 
@@ -10,6 +13,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+
+# Use Node 24 for JS actions (stops Node 20 deprecation warnings on runners).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: read
@@ -47,7 +54,7 @@ jobs:
           VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
