@@ -24,7 +24,6 @@ export function BreitlingWatchCard({
           decoding="async"
         />
       </span>
-      <span className="breitling-watch-selector-card-overlay" aria-hidden />
     </button>
   )
 }

@@ -513,6 +513,14 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: none;
+}
+
+.breitling-watch-selector-card:hover,
+.breitling-watch-selector-card:focus-visible {
+  box-shadow: none;
 }
 
 .breitling-watch-selector-card:focus-visible {
@@ -546,25 +554,14 @@
   height: 100%;
   object-fit: fill;
   object-position: center;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 0.45s ease;
 }
 
-.breitling-watch-selector-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(9, 9, 26, 0.5) 0%,
-    rgba(9, 9, 26, 0.08) 42%,
-    transparent 58%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-
-.breitling-watch-selector-card:hover .breitling-watch-selector-card-overlay,
-.breitling-watch-selector-card:focus-visible .breitling-watch-selector-card-overlay {
-  opacity: 1;
+.breitling-watch-selector-card:hover img,
+.breitling-watch-selector-card:focus-visible img {
+  transform: scale(1.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -573,8 +570,13 @@
     transition: none;
   }
 
-  .breitling-watch-selector-card-overlay {
+  .breitling-watch-selector-card img {
     transition: none;
+  }
+
+  .breitling-watch-selector-card:hover img,
+  .breitling-watch-selector-card:focus-visible img {
+    transform: none;
   }
 }
 
