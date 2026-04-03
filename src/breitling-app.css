@@ -169,8 +169,10 @@
   text-align: center;
 }
 
-/* Sticky dock: same yellow bar as masthead + Day / Filter */
+/* Sticky dock: same yellow bar as masthead + Day / Filter (mobile: hamburger + Filter) */
 .breitling-watch-selector-sticky-dock {
+  --breitling-sticky-dock-height: 52px;
+
   position: sticky;
   top: 0;
   z-index: 55;
@@ -178,6 +180,7 @@
   color: var(--breitling-topnav-fg);
   border-bottom: 1px solid var(--breitling-topnav-divider);
   box-shadow: 0 2px 8px rgba(9, 9, 26, 0.06);
+  min-height: var(--breitling-sticky-dock-height);
 }
 
 .breitling-watch-selector-sticky-dock-inner {
@@ -285,6 +288,10 @@
   color: var(--breitling-topnav-muted);
 }
 
+.breitling-watch-selector-header-nav-desktop-only {
+  display: block;
+}
+
 .breitling-watch-selector-nav-row {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -351,6 +358,262 @@
   .breitling-watch-selector-header-utilities {
     grid-column: 1;
     justify-self: center;
+  }
+}
+
+/* Mobile masthead: logo only; nav + utilities live in hamburger menu */
+@media (max-width: 767px) {
+  .breitling-watch-selector-header-nav-desktop-only {
+    display: none;
+  }
+
+  .breitling-watch-selector-header-intro-inner {
+    padding: 12px var(--breitling-space-page-inline) 14px;
+  }
+
+  .breitling-watch-selector-logo-link {
+    gap: 4px;
+  }
+
+  .breitling-watch-selector-logo-mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .breitling-watch-selector-logo-wordmark {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+  }
+
+  .breitling-watch-selector-logo-year {
+    font-size: 8px;
+  }
+}
+
+/* Hamburger (mobile sticky) — hidden on desktop */
+.breitling-watch-selector-mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--breitling-touch-target-min);
+  min-height: var(--breitling-touch-target-min);
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--breitling-topnav-fg);
+  cursor: pointer;
+}
+
+.breitling-watch-selector-mobile-nav-toggle:hover {
+  background: var(--breitling-topnav-icon-hover-bg);
+}
+
+@media (max-width: 767px) {
+  .breitling-watch-selector-sticky-dock {
+    --breitling-sticky-dock-height: 58px;
+    min-height: 58px;
+  }
+
+  .breitling-watch-selector-mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .breitling-watch-selector-sticky-dock-inner {
+    display: grid;
+    grid-template-columns: var(--breitling-touch-target-min) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 6px 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 42px;
+  }
+
+  .breitling-watch-selector-sticky-dock-logo {
+    justify-self: center;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .breitling-watch-selector-sticky-dock-inner .breitling-watch-selector-control-bar {
+    justify-self: end;
+    width: auto;
+    justify-content: flex-end;
+  }
+
+  .breitling-watch-selector-sticky-dock-inner-controls-end
+    .breitling-watch-selector-control-bar {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+
+/* Mobile nav overlay (below sticky dock z-index) */
+.breitling-watch-selector-mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  top: var(--breitling-sticky-dock-height);
+  z-index: 52;
+  background: rgba(9, 9, 26, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.breitling-watch-selector-mobile-nav-backdrop-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.breitling-watch-selector-mobile-nav-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--breitling-sticky-dock-height);
+  z-index: 53;
+  max-height: min(calc(100vh - var(--breitling-sticky-dock-height)), 100dvh);
+  overflow-y: auto;
+  background: var(--breitling-topnav-bg);
+  color: var(--breitling-topnav-fg);
+  border-bottom: 1px solid var(--breitling-topnav-divider);
+  box-shadow: 0 12px 40px rgba(9, 9, 26, 0.12);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease;
+}
+
+.breitling-watch-selector-mobile-nav-panel-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.breitling-watch-selector-mobile-nav-panel-inner {
+  padding: 20px var(--breitling-space-page-inline) 28px;
+}
+
+.breitling-watch-selector-mobile-nav-title {
+  margin: 0 0 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--breitling-topnav-muted);
+}
+
+.breitling-watch-selector-mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border-top: 1px solid var(--breitling-topnav-divider);
+}
+
+.breitling-watch-selector-mobile-nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 16px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--breitling-topnav-divider);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--breitling-topnav-fg);
+  cursor: pointer;
+}
+
+.breitling-watch-selector-mobile-nav-link-active {
+  box-shadow: inset 3px 0 0 0 var(--breitling-color-navy);
+  padding-left: 12px;
+}
+
+.breitling-watch-selector-mobile-nav-theme-row {
+  margin-top: 24px;
+}
+
+.breitling-watch-selector-mobile-nav-theme-toggle {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Theme pill on gold (match sticky dock treatment) */
+.breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-day {
+  background: var(--breitling-color-navy);
+  color: var(--breitling-chip-on-gold);
+}
+
+.breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-day:hover {
+  background: var(--breitling-color-navy-deep);
+  color: var(--breitling-chip-on-gold);
+}
+
+.breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-day .breitling-watch-selector-pill-icon {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-night {
+  background: var(--breitling-chip-on-gold);
+  color: var(--breitling-color-on-gold);
+  border: 1px solid var(--breitling-topnav-divider);
+}
+
+.breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-night:hover {
+  background: var(--breitling-chip-on-gold-hover);
+  border-color: var(--breitling-chip-on-gold-border-strong);
+}
+
+.breitling-theme-night .breitling-watch-selector-mobile-nav-panel .breitling-watch-selector-pill-toggle-night {
+  background: var(--breitling-chip-on-gold);
+  color: var(--breitling-color-on-gold);
+}
+
+.breitling-watch-selector-mobile-nav-utilities {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 8px;
+}
+
+.breitling-watch-selector-mobile-nav-utility-btn {
+  border-radius: 10px;
+}
+
+/* Desktop: hide mobile-only UI */
+@media (min-width: 768px) {
+  .breitling-watch-selector-mobile-nav-backdrop,
+  .breitling-watch-selector-mobile-nav-panel {
+    display: none !important;
+  }
+
+  .breitling-watch-selector-mobile-nav-toggle {
+    display: none !important;
+  }
+}
+
+/* Hide Day/Night in sticky control bar on mobile (it lives in the menu) */
+@media (max-width: 767px) {
+  .breitling-watch-selector-control-bar-theme-desktop {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breitling-watch-selector-mobile-nav-panel,
+  .breitling-watch-selector-mobile-nav-backdrop {
+    transition: none;
+  }
+
+  .breitling-watch-selector-mobile-nav-panel-open {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 

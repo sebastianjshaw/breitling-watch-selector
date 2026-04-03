@@ -1,6 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import type { ThemeMode } from '../types/theme'
-import { BreitlingControlBar } from './BreitlingControlBar'
+import {
+  BreitlingControlBar,
+  BreitlingThemeToggleButton,
+} from './BreitlingControlBar'
 import { BreitlingLogoMark } from './BreitlingLogoMark'
 
 const navItems = [
@@ -70,6 +73,35 @@ function IconBag() {
   )
 }
 
+function IconMenu({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className="breitling-watch-selector-mobile-nav-toggle-svg"
+    >
+      {open ? (
+        <path
+          d="M6 6L18 18M18 6L6 18"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+      ) : (
+        <path
+          d="M5 8H19M5 12H19M5 16H19"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+      )}
+    </svg>
+  )
+}
+
 export function BreitlingHeader({
   themeMode,
   onThemeModeChange,
@@ -79,6 +111,8 @@ export function BreitlingHeader({
 }: BreitlingHeaderProps) {
   const introRef = useRef<HTMLElement | null>(null)
   const [introInView, setIntroInView] = useState(true)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const mobileNavTitleId = useId()
 
   useEffect(() => {
     const el = introRef.current
@@ -95,6 +129,35 @@ export function BreitlingHeader({
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    if (!mobileNavOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [mobileNavOpen])
+
+  useEffect(() => {
+    if (!mobileNavOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileNavOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [mobileNavOpen])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const onChange = () => {
+      if (mq.matches) setMobileNavOpen(false)
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const closeMobileNav = () => setMobileNavOpen(false)
+
   return (
     <>
       <header
@@ -109,52 +172,143 @@ export function BreitlingHeader({
             </span>
             <span className="breitling-watch-selector-logo-year">1884</span>
           </a>
-          <div className="breitling-watch-selector-nav-row">
-            <nav className="breitling-watch-selector-nav" aria-label="Primary">
-              {navItems.map((label) => (
+          <div className="breitling-watch-selector-header-nav-desktop-only">
+            <div className="breitling-watch-selector-nav-row">
+              <nav className="breitling-watch-selector-nav" aria-label="Primary">
+                {navItems.map((label) => (
+                  <button
+                    key={label}
+                    type="button"
+                    className={
+                      label === 'Watches'
+                        ? 'breitling-watch-selector-nav-link breitling-watch-selector-nav-link-active'
+                        : 'breitling-watch-selector-nav-link'
+                    }
+                    aria-current={label === 'Watches' ? 'page' : undefined}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </nav>
+              <div
+                className="breitling-watch-selector-header-utilities"
+                aria-label="Utilities"
+              >
                 <button
-                  key={label}
                   type="button"
-                  className={
-                    label === 'Watches'
-                      ? 'breitling-watch-selector-nav-link breitling-watch-selector-nav-link-active'
-                      : 'breitling-watch-selector-nav-link'
-                  }
-                  aria-current={label === 'Watches' ? 'page' : undefined}
+                  className="breitling-watch-selector-icon-btn"
+                  aria-label="Search"
                 >
-                  {label}
+                  <IconSearch />
                 </button>
-              ))}
-            </nav>
-            <div
-              className="breitling-watch-selector-header-utilities"
-              aria-label="Utilities"
-            >
-              <button
-                type="button"
-                className="breitling-watch-selector-icon-btn"
-                aria-label="Search"
-              >
-                <IconSearch />
-              </button>
-              <button
-                type="button"
-                className="breitling-watch-selector-icon-btn"
-                aria-label="Account"
-              >
-                <IconUser />
-              </button>
-              <button
-                type="button"
-                className="breitling-watch-selector-icon-btn"
-                aria-label="Shopping bag"
-              >
-                <IconBag />
-              </button>
+                <button
+                  type="button"
+                  className="breitling-watch-selector-icon-btn"
+                  aria-label="Account"
+                >
+                  <IconUser />
+                </button>
+                <button
+                  type="button"
+                  className="breitling-watch-selector-icon-btn"
+                  aria-label="Shopping bag"
+                >
+                  <IconBag />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </header>
+
+      <div
+        className={
+          mobileNavOpen
+            ? 'breitling-watch-selector-mobile-nav-backdrop breitling-watch-selector-mobile-nav-backdrop-open'
+            : 'breitling-watch-selector-mobile-nav-backdrop'
+        }
+        aria-hidden={!mobileNavOpen}
+        onClick={closeMobileNav}
+      />
+
+      <div
+        id="breitling-watch-selector-mobile-nav"
+        className={
+          mobileNavOpen
+            ? 'breitling-watch-selector-mobile-nav-panel breitling-watch-selector-mobile-nav-panel-open'
+            : 'breitling-watch-selector-mobile-nav-panel'
+        }
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={mobileNavTitleId}
+        aria-hidden={!mobileNavOpen}
+        inert={!mobileNavOpen}
+      >
+        <div className="breitling-watch-selector-mobile-nav-panel-inner">
+          <h2
+            id={mobileNavTitleId}
+            className="breitling-watch-selector-mobile-nav-title"
+          >
+            Menu
+          </h2>
+          <nav
+            className="breitling-watch-selector-mobile-nav-links"
+            aria-label="Primary"
+          >
+            {navItems.map((label) => (
+              <button
+                key={label}
+                type="button"
+                className={
+                  label === 'Watches'
+                    ? 'breitling-watch-selector-mobile-nav-link breitling-watch-selector-mobile-nav-link-active'
+                    : 'breitling-watch-selector-mobile-nav-link'
+                }
+                aria-current={label === 'Watches' ? 'page' : undefined}
+                onClick={closeMobileNav}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+          <div className="breitling-watch-selector-mobile-nav-theme-row">
+            <BreitlingThemeToggleButton
+              themeMode={themeMode}
+              onThemeModeChange={onThemeModeChange}
+              className="breitling-watch-selector-mobile-nav-theme-toggle"
+            />
+          </div>
+          <div
+            className="breitling-watch-selector-mobile-nav-utilities"
+            aria-label="Utilities"
+          >
+            <button
+              type="button"
+              className="breitling-watch-selector-icon-btn breitling-watch-selector-mobile-nav-utility-btn"
+              aria-label="Search"
+              onClick={closeMobileNav}
+            >
+              <IconSearch />
+            </button>
+            <button
+              type="button"
+              className="breitling-watch-selector-icon-btn breitling-watch-selector-mobile-nav-utility-btn"
+              aria-label="Account"
+              onClick={closeMobileNav}
+            >
+              <IconUser />
+            </button>
+            <button
+              type="button"
+              className="breitling-watch-selector-icon-btn breitling-watch-selector-mobile-nav-utility-btn"
+              aria-label="Shopping bag"
+              onClick={closeMobileNav}
+            >
+              <IconBag />
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div className="breitling-watch-selector-sticky-dock">
         <div
@@ -164,6 +318,16 @@ export function BreitlingHeader({
               : 'breitling-watch-selector-sticky-dock-inner'
           }
         >
+          <button
+            type="button"
+            className="breitling-watch-selector-mobile-nav-toggle"
+            onClick={() => setMobileNavOpen((o) => !o)}
+            aria-expanded={mobileNavOpen}
+            aria-controls="breitling-watch-selector-mobile-nav"
+            aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
+          >
+            <IconMenu open={mobileNavOpen} />
+          </button>
           <a
             href="#"
             className={

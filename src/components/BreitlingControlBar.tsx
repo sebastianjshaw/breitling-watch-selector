@@ -1,5 +1,36 @@
 import type { ThemeMode } from '../types/theme'
 
+type BreitlingThemeToggleButtonProps = {
+  themeMode: ThemeMode
+  onThemeModeChange: (mode: ThemeMode) => void
+  className?: string
+}
+
+export function BreitlingThemeToggleButton({
+  themeMode,
+  onThemeModeChange,
+  className,
+}: BreitlingThemeToggleButtonProps) {
+  const isDay = themeMode === 'day'
+  const pillClass =
+    isDay
+      ? 'breitling-watch-selector-pill-toggle breitling-watch-selector-pill-toggle-day'
+      : 'breitling-watch-selector-pill-toggle breitling-watch-selector-pill-toggle-night'
+
+  return (
+    <button
+      type="button"
+      className={className ? `${pillClass} ${className}` : pillClass}
+      onClick={() => onThemeModeChange(isDay ? 'night' : 'day')}
+      aria-pressed={isDay}
+      aria-label={isDay ? 'Switch to night mode' : 'Switch to day mode'}
+    >
+      <span className="breitling-watch-selector-pill-icon" aria-hidden />
+      {isDay ? 'Day' : 'Night'}
+    </button>
+  )
+}
+
 type BreitlingControlBarProps = {
   themeMode: ThemeMode
   onThemeModeChange: (mode: ThemeMode) => void
@@ -28,24 +59,14 @@ export function BreitlingControlBar({
   filterPanelOpen,
   onOpenFilters,
 }: BreitlingControlBarProps) {
-  const isDay = themeMode === 'day'
-
   return (
     <div className="breitling-watch-selector-control-bar">
-      <button
-        type="button"
-        className={
-          isDay
-            ? 'breitling-watch-selector-pill-toggle breitling-watch-selector-pill-toggle-day'
-            : 'breitling-watch-selector-pill-toggle breitling-watch-selector-pill-toggle-night'
-        }
-        onClick={() => onThemeModeChange(isDay ? 'night' : 'day')}
-        aria-pressed={isDay}
-        aria-label={isDay ? 'Switch to night mode' : 'Switch to day mode'}
-      >
-        <span className="breitling-watch-selector-pill-icon" aria-hidden />
-        {isDay ? 'Day' : 'Night'}
-      </button>
+      <div className="breitling-watch-selector-control-bar-theme-desktop">
+        <BreitlingThemeToggleButton
+          themeMode={themeMode}
+          onThemeModeChange={onThemeModeChange}
+        />
+      </div>
       <button
         type="button"
         className="breitling-watch-selector-filter-trigger"
