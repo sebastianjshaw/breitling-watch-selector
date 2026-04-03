@@ -1,36 +1,92 @@
-/* Breitling watch selector — prototype */
+/* Breitling watch selector — prototype
+   Colour + type cues aligned with breitling.com (e.g. /us-en/about/): Open Sans body,
+   condensed display (Barlow Condensed as Italian Plate substitute), #FFC72C yellow. */
 
 :root {
-  --breitling-color-gold: #e8c547;
-  --breitling-color-gold-hover: #f0d060;
-  --breitling-color-ink: #1a1a1a;
-  --breitling-color-muted: #5c5c5c;
-  --breitling-color-border: #e8e8e8;
+  /* Brand (sampled from live breitling.com CSS) */
+  --breitling-color-gold: #ffc72c;
+  --breitling-color-gold-hover: #f5bc1a;
+  --breitling-color-gold-tint: rgba(255, 199, 44, 0.14);
+  --breitling-color-navy: #0e2240;
+  --breitling-color-navy-deep: #072c54;
+  --breitling-color-ink: #111820;
+  --breitling-color-ink-strong: #09091a;
+  --breitling-color-on-gold: #111820;
+  --breitling-color-muted: #666666;
+  --breitling-color-muted-light: #7a7a7a;
+  --breitling-color-border: #ebebeb;
+  --breitling-color-border-strong: #d5d5d5;
   --breitling-color-surface: #ffffff;
-  --breitling-color-page: #fafafa;
-  --breitling-font-sans: 'Montserrat', system-ui, sans-serif;
+  --breitling-color-page: #f9f9f9;
+  --breitling-font-body: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* breitling.com uses Italian Plate for display; Barlow Condensed is a similar condensed grotesque */
+  --breitling-font-display: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Condensed', system-ui,
+    sans-serif;
   --breitling-radius-pill: 999px;
-  --breitling-shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.12);
+  --breitling-shadow-modal: 0 28px 90px rgba(9, 9, 26, 0.14);
+  --breitling-shadow-sticky: 0 1px 0 rgba(9, 9, 26, 0.06);
+  /* Top nav (About-style yellow bar) */
+  --breitling-topnav-bg: var(--breitling-color-gold);
+  --breitling-topnav-fg: var(--breitling-color-on-gold);
+  --breitling-topnav-muted: rgba(17, 24, 32, 0.58);
+  --breitling-topnav-divider: rgba(9, 9, 26, 0.12);
 }
 
 .breitling-theme-night {
-  --breitling-color-ink: #f5f5f5;
-  --breitling-color-muted: #a3a3a3;
-  --breitling-color-border: #333333;
-  --breitling-color-surface: #141414;
-  --breitling-color-page: #0d0d0d;
-  --breitling-shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --breitling-color-gold: #ffc72c;
+  --breitling-color-gold-hover: #ffd24d;
+  --breitling-color-gold-tint: rgba(255, 199, 44, 0.12);
+  --breitling-color-ink: #f9f9f9;
+  --breitling-color-ink-strong: #ffffff;
+  --breitling-color-on-gold: #111820;
+  --breitling-color-muted: #a8a8a8;
+  --breitling-color-muted-light: #8a8a8a;
+  --breitling-color-border: #2a3140;
+  --breitling-color-border-strong: #3d4659;
+  --breitling-color-surface: #111820;
+  --breitling-color-page: #09091a;
+  --breitling-shadow-modal: 0 28px 90px rgba(0, 0, 0, 0.55);
+  --breitling-shadow-sticky: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .breitling-watch-selector-root {
   min-height: 100vh;
   background: var(--breitling-color-page);
   color: var(--breitling-color-ink);
-  font-family: var(--breitling-font-sans);
-  font-size: 14px;
+  font-family: var(--breitling-font-body);
+  font-size: 15px;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Uppercase UI / headings — condensed display stack (Italian Plate role on breitling.com) */
+.breitling-watch-selector-logo-wordmark,
+.breitling-watch-selector-logo-year,
+.breitling-watch-selector-sticky-dock-logo-word,
+.breitling-watch-selector-sticky-dock-logo-year,
+.breitling-watch-selector-nav-link,
+.breitling-watch-selector-pill-toggle,
+.breitling-watch-selector-filter-trigger,
+.breitling-watch-selector-filter-badge,
+.breitling-watch-selector-results-meta,
+.breitling-watch-selector-empty-title,
+.breitling-watch-selector-text-btn,
+.breitling-watch-selector-filter-panel-title,
+.breitling-watch-selector-filter-section-title,
+.breitling-watch-selector-filter-chip,
+.breitling-watch-selector-btn-primary,
+.breitling-watch-selector-btn-ghost,
+.breitling-watch-selector-price-labels,
+.breitling-watch-selector-range-dual label,
+.breitling-watch-selector-modal-ref,
+.breitling-watch-selector-modal-name,
+.breitling-watch-selector-modal-price,
+.breitling-watch-selector-modal-spec-block strong,
+.breitling-watch-selector-modal-meta-item dt,
+.breitling-watch-selector-ai-panel-header > span,
+.breitling-watch-selector-ai-bar {
+  font-family: var(--breitling-font-display);
 }
 
 .breitling-watch-selector-main {
@@ -39,11 +95,13 @@
   padding: 0 24px 120px;
 }
 
-/* Masthead intro — scrolls away (nav + main heading); logo not duplicated in sticky until intro leaves view */
+/* Masthead intro — Breitling yellow top nav (aligned with about page treatment) */
 .breitling-watch-selector-header-intro {
   position: relative;
-  background: var(--breitling-color-surface);
-  border-bottom: 1px solid var(--breitling-color-border);
+  background: var(--breitling-topnav-bg);
+  color: var(--breitling-topnav-fg);
+  border-top: 3px solid var(--breitling-color-navy);
+  border-bottom: 1px solid var(--breitling-topnav-divider);
 }
 
 .breitling-watch-selector-header-intro-inner {
@@ -53,14 +111,15 @@
   text-align: center;
 }
 
-/* Sticky dock: compact logo + Day / Filter — stays pinned while browsing the grid */
+/* Sticky dock: same yellow bar as masthead + Day / Filter */
 .breitling-watch-selector-sticky-dock {
   position: sticky;
   top: 0;
   z-index: 55;
-  background: var(--breitling-color-surface);
-  border-bottom: 1px solid var(--breitling-color-border);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  background: var(--breitling-topnav-bg);
+  color: var(--breitling-topnav-fg);
+  border-bottom: 1px solid var(--breitling-topnav-divider);
+  box-shadow: 0 2px 8px rgba(9, 9, 26, 0.06);
 }
 
 .breitling-watch-selector-sticky-dock-inner {
@@ -107,7 +166,7 @@
 .breitling-watch-selector-sticky-dock-logo-mark {
   width: 28px;
   height: 28px;
-  color: var(--breitling-color-ink);
+  color: var(--breitling-topnav-fg);
   flex-shrink: 0;
 }
 
@@ -129,7 +188,7 @@
 .breitling-watch-selector-sticky-dock-logo-year {
   font-size: 8px;
   letter-spacing: 0.2em;
-  color: var(--breitling-color-muted);
+  color: var(--breitling-topnav-muted);
 }
 
 @media (min-width: 640px) {
@@ -152,7 +211,7 @@
 .breitling-watch-selector-logo-mark {
   width: 36px;
   height: 36px;
-  color: var(--breitling-color-ink);
+  color: var(--breitling-topnav-fg);
 }
 
 .breitling-watch-selector-logo-wordmark {
@@ -165,7 +224,7 @@
 .breitling-watch-selector-logo-year {
   font-size: 9px;
   letter-spacing: 0.25em;
-  color: var(--breitling-color-muted);
+  color: var(--breitling-topnav-muted);
 }
 
 .breitling-watch-selector-nav-row {
@@ -186,33 +245,33 @@
   gap: 28px;
 }
 
-.breitling-watch-selector-nav-link {
+.breitling-watch-selector-header-intro .breitling-watch-selector-nav-link {
   position: relative;
   background: none;
   border: none;
   padding: 8px 0;
   font: inherit;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--breitling-color-ink);
+  color: var(--breitling-topnav-fg);
   cursor: pointer;
   text-decoration: none;
 }
 
-.breitling-watch-selector-nav-link:hover {
-  color: var(--breitling-color-muted);
+.breitling-watch-selector-header-intro .breitling-watch-selector-nav-link:hover {
+  color: var(--breitling-color-navy-deep);
 }
 
-.breitling-watch-selector-nav-link-active::after {
+.breitling-watch-selector-header-intro .breitling-watch-selector-nav-link-active::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  background: var(--breitling-color-gold);
+  height: 3px;
+  background: var(--breitling-color-navy);
 }
 
 .breitling-watch-selector-header-utilities {
@@ -245,13 +304,13 @@
   height: 36px;
   border: none;
   background: transparent;
-  color: var(--breitling-color-ink);
+  color: var(--breitling-topnav-fg);
   cursor: pointer;
   border-radius: 8px;
 }
 
-.breitling-watch-selector-icon-btn:hover {
-  background: var(--breitling-color-border);
+.breitling-watch-selector-header-intro .breitling-watch-selector-icon-btn:hover {
+  background: rgba(9, 9, 26, 0.08);
 }
 
 /* Control bar (inside sticky dock) */
@@ -295,7 +354,7 @@
 
 .breitling-watch-selector-pill-toggle-day {
   background: var(--breitling-color-gold);
-  color: var(--breitling-color-ink);
+  color: var(--breitling-color-on-gold);
 }
 
 .breitling-watch-selector-pill-toggle-day:hover {
@@ -308,7 +367,7 @@
 }
 
 .breitling-theme-night .breitling-watch-selector-pill-toggle-night {
-  background: #2a2a2a;
+  background: #2a3140;
   color: var(--breitling-color-ink);
 }
 
@@ -347,12 +406,58 @@
   padding: 0 6px;
   border-radius: var(--breitling-radius-pill);
   background: var(--breitling-color-gold);
-  color: var(--breitling-color-ink);
+  color: var(--breitling-color-on-gold);
   font-size: 10px;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Day / Filter on yellow bar: contrast (navy + white / white chips) */
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-day {
+  background: var(--breitling-color-navy);
+  color: #ffffff;
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-day:hover {
+  background: var(--breitling-color-navy-deep);
+  color: #ffffff;
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-day .breitling-watch-selector-pill-icon {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-night {
+  background: #ffffff;
+  color: var(--breitling-color-on-gold);
+  border: 1px solid var(--breitling-topnav-divider);
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-night:hover {
+  background: #f5f5f5;
+  border-color: rgba(9, 9, 26, 0.2);
+}
+
+.breitling-theme-night .breitling-watch-selector-sticky-dock .breitling-watch-selector-pill-toggle-night {
+  background: #ffffff;
+  color: var(--breitling-color-on-gold);
+}
+
+.breitling-theme-night .breitling-watch-selector-sticky-dock .breitling-watch-selector-filter-trigger {
+  color: var(--breitling-color-on-gold);
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-filter-trigger {
+  background: #ffffff;
+  color: var(--breitling-color-on-gold);
+  border: 1px solid rgba(9, 9, 26, 0.14);
+}
+
+.breitling-watch-selector-sticky-dock .breitling-watch-selector-filter-trigger:hover {
+  border-color: var(--breitling-color-navy);
+  background: #fafafa;
 }
 
 /* Grid */
@@ -450,10 +555,12 @@
 }
 
 .breitling-watch-selector-empty-copy {
+  font-family: var(--breitling-font-body);
   color: var(--breitling-color-muted);
   max-width: 360px;
   margin: 0 auto 20px;
-  line-height: 1.6;
+  line-height: 1.65;
+  font-size: 15px;
 }
 
 .breitling-watch-selector-text-btn {
@@ -567,7 +674,7 @@
 
 .breitling-watch-selector-filter-chip-selected {
   border-color: var(--breitling-color-gold);
-  background: rgba(232, 197, 71, 0.12);
+  background: var(--breitling-color-gold-tint);
 }
 
 .breitling-watch-selector-price-range {
@@ -606,8 +713,8 @@
   border-radius: 8px;
   background: var(--breitling-color-page);
   color: var(--breitling-color-ink);
-  font: inherit;
-  font-size: 13px;
+  font-family: var(--breitling-font-body);
+  font-size: 14px;
 }
 
 .breitling-watch-selector-filter-footer {
@@ -623,11 +730,11 @@
   border: none;
   border-radius: var(--breitling-radius-pill);
   background: var(--breitling-color-gold);
-  color: var(--breitling-color-ink);
+  color: var(--breitling-color-on-gold);
   font: inherit;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -654,11 +761,31 @@
   border-color: var(--breitling-color-muted);
 }
 
-/* Modal */
+/* Modal — enter animation (mount always opens; keyframes run on first paint) */
+@keyframes breitling-watch-selector-modal-backdrop-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes breitling-watch-selector-modal-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .breitling-watch-selector-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(9, 9, 26, 0.52);
   z-index: 110;
   display: flex;
   align-items: center;
@@ -666,12 +793,11 @@
   padding: 24px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s;
 }
 
 .breitling-watch-selector-modal-backdrop-open {
-  opacity: 1;
   pointer-events: auto;
+  animation: breitling-watch-selector-modal-backdrop-fade-in 0.32s ease-out forwards;
 }
 
 .breitling-watch-selector-modal {
@@ -685,12 +811,28 @@
   grid-template-columns: 1fr 1fr;
   box-shadow: var(--breitling-shadow-modal);
   position: relative;
-  transform: translateY(12px);
-  transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(22px) scale(0.99);
 }
 
 .breitling-watch-selector-modal-backdrop-open .breitling-watch-selector-modal {
-  transform: translateY(0);
+  animation: breitling-watch-selector-modal-panel-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.06s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breitling-watch-selector-modal-backdrop-open {
+    animation: none;
+    opacity: 1;
+  }
+
+  .breitling-watch-selector-modal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .breitling-watch-selector-modal-backdrop-open .breitling-watch-selector-modal {
+    animation: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -792,20 +934,21 @@
 }
 
 .breitling-watch-selector-modal-name {
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  line-height: 1.35;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
 }
 
 .breitling-watch-selector-modal-price {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 .breitling-watch-selector-modal-spec-block {
-  font-size: 13px;
+  font-family: var(--breitling-font-body);
+  font-size: 14px;
   line-height: 1.65;
   color: var(--breitling-color-muted);
 }
@@ -820,8 +963,9 @@
 }
 
 .breitling-watch-selector-modal-desc {
-  font-size: 14px;
-  line-height: 1.7;
+  font-family: var(--breitling-font-body);
+  font-size: 15px;
+  line-height: 1.75;
   color: var(--breitling-color-ink);
 }
 
@@ -856,6 +1000,8 @@
 
 .breitling-watch-selector-modal-meta-item dd {
   margin: 0;
+  font-family: var(--breitling-font-body);
+  font-size: 13px;
 }
 
 .breitling-watch-selector-modal-thumb-photo {
@@ -886,13 +1032,14 @@
   border-radius: var(--breitling-radius-pill);
   border: none;
   background: var(--breitling-color-gold);
-  color: var(--breitling-color-ink);
+  color: var(--breitling-color-on-gold);
   font: inherit;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(232, 197, 71, 0.45);
+  box-shadow: 0 10px 36px rgba(255, 199, 44, 0.38);
   max-width: min(100vw - 48px, 380px);
   text-align: left;
 }
@@ -938,7 +1085,8 @@
   padding: 12px 16px;
   background: var(--breitling-color-page);
   border-radius: 12px 12px 12px 4px;
-  font-size: 14px;
+  font-family: var(--breitling-font-body);
+  font-size: 15px;
 }
 
 .breitling-watch-selector-ai-panel-footer {
@@ -957,8 +1105,8 @@
   border-radius: var(--breitling-radius-pill);
   background: var(--breitling-color-page);
   color: var(--breitling-color-ink);
-  font: inherit;
-  font-size: 13px;
+  font-family: var(--breitling-font-body);
+  font-size: 14px;
 }
 
 .breitling-watch-selector-ai-input:disabled {
@@ -971,10 +1119,10 @@
   border-radius: var(--breitling-radius-pill);
   background: var(--breitling-color-border);
   color: var(--breitling-color-muted);
-  font: inherit;
+  font-family: var(--breitling-font-display);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: not-allowed;
 }
