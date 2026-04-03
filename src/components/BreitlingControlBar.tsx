@@ -1,4 +1,4 @@
-type ThemeMode = 'day' | 'night'
+import type { ThemeMode } from '../types/theme'
 
 type BreitlingControlBarProps = {
   themeMode: ThemeMode

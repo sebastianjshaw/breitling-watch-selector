@@ -1,4 +1,4 @@
-import { getPriceBounds, WATCHES } from '../data/watches'
+import { getPriceBounds } from '../data/watches'
 import type { Watch, WatchFilters } from '../data/types'
 
 export function createDefaultWatchFilters(): WatchFilters {
@@ -57,5 +57,3 @@ export function countActiveFilters(f: WatchFilters): number {
   if (f.priceMin > min || f.priceMax < max) n += 1
   return n
 }
-
-export { WATCHES }

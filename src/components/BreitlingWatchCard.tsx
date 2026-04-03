@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Watch } from '../data/types'
 
 type BreitlingWatchCardProps = {
@@ -5,7 +6,7 @@ type BreitlingWatchCardProps = {
   onSelect: (watch: Watch) => void
 }
 
-export function BreitlingWatchCard({
+function BreitlingWatchCardInner({
   watch,
   onSelect,
 }: BreitlingWatchCardProps) {
@@ -27,3 +28,5 @@ export function BreitlingWatchCard({
     </button>
   )
 }
+
+export const BreitlingWatchCard = memo(BreitlingWatchCardInner)

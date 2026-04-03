@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type { ThemeMode } from '../types/theme'
 import { BreitlingControlBar } from './BreitlingControlBar'
 import { BreitlingLogoMark } from './BreitlingLogoMark'
 
@@ -12,8 +13,8 @@ const navItems = [
 ] as const
 
 export type BreitlingHeaderProps = {
-  themeMode: 'day' | 'night'
-  onThemeModeChange: (mode: 'day' | 'night') => void
+  themeMode: ThemeMode
+  onThemeModeChange: (mode: ThemeMode) => void
   filterCount: number
   filterPanelOpen: boolean
   onOpenFilters: () => void
@@ -119,6 +120,7 @@ export function BreitlingHeader({
                       ? 'breitling-watch-selector-nav-link breitling-watch-selector-nav-link-active'
                       : 'breitling-watch-selector-nav-link'
                   }
+                  aria-current={label === 'Watches' ? 'page' : undefined}
                 >
                   {label}
                 </button>

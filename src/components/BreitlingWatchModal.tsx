@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Watch } from '../data/types'
+import { useOverlayFocus } from '../hooks/useOverlayFocus'
+import { formatUsd } from '../utils/formatUsd'
 
 type BreitlingWatchModalProps = {
   watch: Watch | null
   onClose: () => void
 }
-
-const priceUsd = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
 
 function IconDial() {
   return (
@@ -98,7 +94,11 @@ const THUMB_ICONS = [IconDial, IconCase, IconStrap, IconDetail] as const
 
 export function BreitlingWatchModal({ watch, onClose }: BreitlingWatchModalProps) {
   const [activeThumb, setActiveThumb] = useState(0)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeBtnRef = useRef<HTMLButtonElement>(null)
   const open = watch !== null
+
+  useOverlayFocus(open, dialogRef, closeBtnRef)
 
   useEffect(() => {
     if (!open) return
@@ -133,12 +133,14 @@ export function BreitlingWatchModal({ watch, onClose }: BreitlingWatchModalProps
       }}
     >
       <div
+        ref={dialogRef}
         className="breitling-watch-selector-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="breitling-watch-modal-title"
       >
         <button
+          ref={closeBtnRef}
           type="button"
           className="breitling-watch-selector-modal-close"
           onClick={onClose}
@@ -203,7 +205,7 @@ export function BreitlingWatchModal({ watch, onClose }: BreitlingWatchModalProps
             {watch.name}
           </h2>
           <p className="breitling-watch-selector-modal-price">
-            {priceUsd.format(watch.priceUsd)}
+            {formatUsd(watch.priceUsd)}
           </p>
           <div className="breitling-watch-selector-modal-spec-block">
             <strong>Materials &amp; case</strong>

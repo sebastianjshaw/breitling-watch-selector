@@ -4,31 +4,26 @@ import { BreitlingFilterPanel } from './components/BreitlingFilterPanel'
 import { BreitlingHeader } from './components/BreitlingHeader'
 import { BreitlingWatchGrid } from './components/BreitlingWatchGrid'
 import { BreitlingWatchModal } from './components/BreitlingWatchModal'
+import { WATCHES } from './data/watches'
 import type { Watch } from './data/types'
+import type { ThemeMode } from './types/theme'
 import {
   countActiveFilters,
   createDefaultWatchFilters,
   filterWatches,
-  WATCHES,
 } from './utils/filterWatches'
 import './breitling-app.css'
-
-type ThemeMode = 'day' | 'night'
 
 function App() {
   const [themeMode, setThemeMode] = useState<ThemeMode>('day')
   const [filters, setFilters] = useState(createDefaultWatchFilters)
   const [filterPanelOpen, setFilterPanelOpen] = useState(false)
   const [selectedWatch, setSelectedWatch] = useState<Watch | null>(null)
+  const [conciergeOpen, setConciergeOpen] = useState(false)
 
   const filtered = useMemo(
     () => filterWatches(WATCHES, filters),
     [filters],
-  )
-
-  const watchGridKey = useMemo(
-    () => filtered.map((w) => w.id).join('|'),
-    [filtered],
   )
 
   const filterCount = useMemo(() => countActiveFilters(filters), [filters])
@@ -38,8 +33,17 @@ function App() {
       ? 'breitling-watch-selector-root breitling-theme-night'
       : 'breitling-watch-selector-root'
 
+  const mainInert =
+    filterPanelOpen || selectedWatch !== null || conciergeOpen
+
   return (
     <div className={rootClass}>
+      <a
+        href="#breitling-watch-selector-main-content"
+        className="breitling-watch-selector-skip-link"
+      >
+        Skip to main content
+      </a>
       <BreitlingHeader
         themeMode={themeMode}
         onThemeModeChange={setThemeMode}
@@ -47,9 +51,13 @@ function App() {
         filterPanelOpen={filterPanelOpen}
         onOpenFilters={() => setFilterPanelOpen(true)}
       />
-      <main className="breitling-watch-selector-main">
+      <main
+        id="breitling-watch-selector-main-content"
+        className="breitling-watch-selector-main"
+        tabIndex={-1}
+        inert={mainInert}
+      >
         <BreitlingWatchGrid
-          key={watchGridKey}
           watches={filtered}
           onSelectWatch={setSelectedWatch}
           onResetFilters={() => setFilters(createDefaultWatchFilters())}
@@ -67,7 +75,7 @@ function App() {
         watch={selectedWatch}
         onClose={() => setSelectedWatch(null)}
       />
-      <BreitlingAIChatBar />
+      <BreitlingAIChatBar onOpenChange={setConciergeOpen} />
     </div>
   )
 }
