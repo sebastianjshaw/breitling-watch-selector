@@ -184,8 +184,8 @@ export function BreitlingWatchModal({ watch, onClose }: BreitlingWatchModalProps
                     <img
                       src={watch.heroImageUrl}
                       alt=""
-                      width={48}
-                      height={48}
+                      width={40}
+                      height={40}
                       className="breitling-watch-selector-modal-thumb-photo"
                     />
                   ) : Icon ? (

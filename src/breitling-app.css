@@ -1226,6 +1226,120 @@
   }
 }
 
+/* Modal — compact mobile: less scroll, hero + thumbs on one row, tighter copy */
+@media (max-width: 767px) {
+  .breitling-watch-selector-modal-backdrop {
+    align-items: flex-start;
+    padding: max(10px, env(safe-area-inset-top, 0px)) 12px 12px;
+  }
+
+  .breitling-watch-selector-modal {
+    max-height: calc(100dvh - max(10px, env(safe-area-inset-top, 0px)) - 24px);
+    margin-top: 0;
+  }
+
+  .breitling-watch-selector-modal-close {
+    top: 10px;
+    right: 10px;
+  }
+
+  .breitling-watch-selector-modal-visual {
+    padding: 12px 12px 10px;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .breitling-watch-selector-modal-hero {
+    flex: 0 0 auto;
+    min-height: 0;
+    aspect-ratio: 1;
+    max-height: min(52vw, 220px);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .breitling-watch-selector-modal-hero img {
+    object-fit: contain;
+  }
+
+  .breitling-watch-selector-modal-thumbs {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .breitling-watch-selector-modal-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .breitling-watch-selector-modal-thumb {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .breitling-watch-selector-modal-thumb svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .breitling-watch-selector-modal-detail {
+    padding: 16px 16px 20px;
+    gap: 12px;
+    overflow-y: visible;
+  }
+
+  .breitling-watch-selector-modal-name {
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .breitling-watch-selector-modal-price {
+    font-size: 17px;
+  }
+
+  .breitling-watch-selector-modal-spec-block {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .breitling-watch-selector-modal-spec-block strong {
+    margin-bottom: 4px;
+  }
+
+  .breitling-watch-selector-modal-desc {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .breitling-watch-selector-modal-meta-grid {
+    gap: 8px 12px;
+  }
+
+  .breitling-watch-selector-modal-meta-item dd {
+    font-size: 12px;
+  }
+
+  .breitling-watch-selector-modal-actions {
+    gap: 8px;
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  .breitling-watch-selector-modal-actions .breitling-watch-selector-btn-primary {
+    min-width: 0;
+  }
+}
+
 .breitling-watch-selector-modal-close {
   position: absolute;
   top: 16px;
