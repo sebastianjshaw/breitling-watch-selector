@@ -4,6 +4,8 @@ import { BreitlingWatchCard } from './BreitlingWatchCard'
 
 type BreitlingWatchGridProps = {
   watches: Watch[]
+  /** When true, show each matching watch once and disable infinite scroll. */
+  filtersActive: boolean
   onSelectWatch: (watch: Watch) => void
   onResetFilters: () => void
 }
@@ -27,19 +29,23 @@ function buildRepeatedSlots(
 
 export function BreitlingWatchGrid({
   watches,
+  filtersActive,
   onSelectWatch,
   onResetFilters,
 }: BreitlingWatchGridProps) {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE)
 
-  const slots = useMemo(
-    () => buildRepeatedSlots(watches, visibleCount),
-    [watches, visibleCount],
-  )
+  const slots = useMemo(() => {
+    if (filtersActive) {
+      return watches.map((w) => ({ watch: w, slotKey: w.id }))
+    }
+    return buildRepeatedSlots(watches, visibleCount)
+  }, [watches, visibleCount, filtersActive])
 
   const sentinelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (filtersActive) return
     const node = sentinelRef.current
     if (!node || watches.length === 0) return
 
@@ -57,13 +63,20 @@ export function BreitlingWatchGrid({
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [watches, visibleCount])
+  }, [watches, visibleCount, filtersActive])
 
   return (
     <>
       <p className="breitling-watch-selector-results-meta">
         {watches.length === 0 ? (
           <>No matching timepieces</>
+        ) : filtersActive ? (
+          <>
+            {watches.length}{' '}
+            {watches.length === 1
+              ? 'model matches your filters'
+              : 'models match your filters'}
+          </>
         ) : (
           <>
             {watches.length}{' '}
@@ -99,11 +112,13 @@ export function BreitlingWatchGrid({
                 <BreitlingWatchCard watch={w} onSelect={onSelectWatch} />
               </div>
             ))}
-            <div
-              ref={sentinelRef}
-              className="breitling-watch-selector-infinite-sentinel"
-              aria-hidden
-            />
+            {!filtersActive ? (
+              <div
+                ref={sentinelRef}
+                className="breitling-watch-selector-infinite-sentinel"
+                aria-hidden
+              />
+            ) : null}
           </>
         )}
       </div>

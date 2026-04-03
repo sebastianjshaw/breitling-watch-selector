@@ -58,7 +58,9 @@ function App() {
         inert={mainInert}
       >
         <BreitlingWatchGrid
+          key={filterCount > 0 ? 'filtered' : 'browse'}
           watches={filtered}
+          filtersActive={filterCount > 0}
           onSelectWatch={setSelectedWatch}
           onResetFilters={() => setFilters(createDefaultWatchFilters())}
         />
