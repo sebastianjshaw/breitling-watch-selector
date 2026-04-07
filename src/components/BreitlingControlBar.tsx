@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import type { ThemeMode } from '../types/theme'
 
 type BreitlingThemeToggleButtonProps = {
@@ -59,6 +60,18 @@ export function BreitlingControlBar({
   filterPanelOpen,
   onOpenFilters,
 }: BreitlingControlBarProps) {
+  const [badgePop, setBadgePop] = useState(false)
+  const prevCountRef = useRef(filterCount)
+
+  useEffect(() => {
+    const prev = prevCountRef.current
+    prevCountRef.current = filterCount
+    if (filterCount <= 0 || filterCount <= prev) return
+    setBadgePop(true)
+    const t = window.setTimeout(() => setBadgePop(false), 420)
+    return () => window.clearTimeout(t)
+  }, [filterCount])
+
   return (
     <div className="breitling-watch-selector-control-bar">
       <div className="breitling-watch-selector-control-bar-theme-desktop">
@@ -77,7 +90,13 @@ export function BreitlingControlBar({
         <IconFunnel />
         Filter
         {filterCount > 0 ? (
-          <span className="breitling-watch-selector-filter-badge">
+          <span
+            className={
+              badgePop
+                ? 'breitling-watch-selector-filter-badge breitling-watch-selector-filter-badge--pop'
+                : 'breitling-watch-selector-filter-badge'
+            }
+          >
             {filterCount}
           </span>
         ) : null}

@@ -91,6 +91,23 @@ export function BreitlingWatchGrid({
       <div className="breitling-watch-selector-grid" role="list">
         {watches.length === 0 ? (
           <div className="breitling-watch-selector-empty">
+            <div
+              className="breitling-watch-selector-empty-ornament"
+              aria-hidden
+            >
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle
+                  className="breitling-watch-selector-empty-ornament-circle"
+                  cx="28"
+                  cy="28"
+                  r="22"
+                />
+                <path
+                  className="breitling-watch-selector-empty-ornament-hand"
+                  d="M28 28V15M28 28l10 8"
+                />
+              </svg>
+            </div>
             <p className="breitling-watch-selector-empty-title">
               No watches match
             </p>
@@ -107,9 +124,13 @@ export function BreitlingWatchGrid({
           </div>
         ) : (
           <>
-            {slots.map(({ watch: w, slotKey }) => (
+            {slots.map(({ watch: w, slotKey }, index) => (
               <div key={slotKey} role="listitem">
-                <BreitlingWatchCard watch={w} onSelect={onSelectWatch} />
+                <BreitlingWatchCard
+                  watch={w}
+                  onSelect={onSelectWatch}
+                  entranceStaggerIndex={index}
+                />
               </div>
             ))}
             {!filtersActive ? (

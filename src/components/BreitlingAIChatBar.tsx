@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useOverlayFocus } from '../hooks/useOverlayFocus'
 
+const CONCIERGE_WHISPERS = [
+  'Looking for the cockpit, the coast, or the corner office? Filters already speak that language.',
+  'We’re shaping a concierge for this space — for now, every tile opens the full story.',
+  'Precision is a slow pleasure. Take your time; the collection isn’t going anywhere.',
+] as const
+
 type BreitlingAIChatBarProps = {
   onOpenChange?: (open: boolean) => void
 }
@@ -40,6 +46,7 @@ function IconSunburst() {
 
 export function BreitlingAIChatBar({ onOpenChange }: BreitlingAIChatBarProps) {
   const [open, setOpen] = useState(false)
+  const [whisperIndex, setWhisperIndex] = useState(0)
   const trapRootRef = useRef<HTMLDivElement>(null)
   const conciergeCloseRef = useRef<HTMLButtonElement>(null)
 
@@ -48,6 +55,21 @@ export function BreitlingAIChatBar({ onOpenChange }: BreitlingAIChatBarProps) {
   useEffect(() => {
     onOpenChange?.(open)
   }, [open, onOpenChange])
+
+  useEffect(() => {
+    if (!open) return
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mq.matches) return
+    const id = window.setInterval(() => {
+      setWhisperIndex((i) => (i + 1) % CONCIERGE_WHISPERS.length)
+    }, 7200)
+    return () => window.clearInterval(id)
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    setWhisperIndex(0)
+  }, [open])
 
   useEffect(() => {
     if (!open) return
@@ -83,7 +105,14 @@ export function BreitlingAIChatBar({ onOpenChange }: BreitlingAIChatBarProps) {
             </button>
           </div>
           <div className="breitling-watch-selector-ai-panel-body">
-            <p className="breitling-watch-selector-ai-msg">hello</p>
+            <p className="breitling-watch-selector-ai-msg">
+              <span
+                key={whisperIndex}
+                className="breitling-watch-selector-ai-msg-line"
+              >
+                {CONCIERGE_WHISPERS[whisperIndex]}
+              </span>
+            </p>
           </div>
           <div className="breitling-watch-selector-ai-panel-footer">
             <div className="breitling-watch-selector-ai-input-row">
